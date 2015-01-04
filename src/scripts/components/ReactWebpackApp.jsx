@@ -14,7 +14,7 @@ var ReactTransitionGroup = React.addons.TransitionGroup;
 require('../../styles/normalize.css');
 require('../../styles/main.css');
 
-var imageURL = require('../../images/yeoman.png');
+var imageURL = require('../../images/spacetuna.jpg');
 
 var ReactWebpackApp = React.createClass({
   render: function() {
