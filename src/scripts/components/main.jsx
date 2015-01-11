@@ -10,6 +10,8 @@ require('../../styles/main.css');
 require('../../styles/fade-transition.css');
 require('../../styles/example-transition.css');
 
+var todoItems = ['hello', 'world', 'click', 'me'];
+
 var App = React.createClass({
 	render: function () {
 		return (
@@ -18,7 +20,7 @@ var App = React.createClass({
 					<li><Link to="user" params={{userID: "123"}}>Bob</Link></li>
 					<li><Link to="user" params={{userID: "123"}} query={{showAge: true}}>Bob With Query Params</Link></li>
 					<li><Link to="user" params={{userID: "abc"}}>Sally</Link></li>
-					<li><Link to="todo">Todo List</Link></li>
+					<li><Link to="todos">Todo List</Link></li>
 				</ul>
 				<ReactTransitionGroup transitionName="fade">
 					<RouteHandler/>
@@ -45,11 +47,14 @@ var User = React.createClass({
 
 var TodoList = React.createClass({
 	getInitialState: function () {
-		return {items: ['hello', 'world', 'click', 'me']};
+		return {items: todoItems};
 	},
 	handleAdd: function () {
 		var newItems = this.state.items.concat([prompt('Enter some text')]);
 		this.setState({items: newItems});
+
+		// persistence
+		todoItems = newItems;
 	},
 	handleRemove: function (i) {
 		var newItems = this.state.items;
@@ -78,7 +83,7 @@ var TodoList = React.createClass({
 var routes = (
 	<Route handler={App}>
 		<Route name="user" path="user/:userID" handler={User}/>
-		<Route name="todo" path="notshure" handler={TodoList}/>
+		<Route name="todos" path="todos" handler={TodoList}/>
 	</Route>
 );
 
