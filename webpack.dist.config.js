@@ -4,24 +4,24 @@
  * This file is set up for serving the distribution version. It will be compiled to dist/ by default
  */
 
-'use strict';
+"use strict";
 
-var webpack = require('webpack');
+var webpack = require("webpack");
 
 module.exports = {
 
 	output: {
-		publicPath: '/assets/',
-		path: 'dist/assets/',
-		filename: 'main.js'
+		publicPath: "/assets/",
+		path: "dist/assets/",
+		filename: "main.js"
 	},
 
 	debug: false,
 	devtool: false,
 	entry: [
-			'./src/scripts/components/main.jsx',
-			'./src/styles/main.css',
-			'./src/styles/normalize.css'
+			"./src/scripts/components/main.jsx",
+			"./src/styles/main.css",
+			"./src/styles/normalize.css"
 	],
 
 	stats: {
@@ -37,28 +37,29 @@ module.exports = {
 	],
 
 	resolve: {
-		extensions: ['', '.js', '.jsx']
+		extensions: ["", ".js", ".jsx"]
 	},
 
 	module: {
 		preLoaders: [{
-			test: '\\.js$',
-			exclude: 'node_modules',
-			loader: 'jshint'
+			test: "\\.js$",
+			exclude: "node_modules",
+			loader: "jshint"
 		}],
 
 		loaders: [{
 			test: /\.jsx$/,
-			loader: 'jsx-loader?harmony'
+			loader: "jsx-loader?harmony"
 		}, {
 			test: /\.css$/,
-			loader: 'style-loader!css-loader'
+			exclude: /\.useable\.css$/,
+			loader: "style!css"
 		}, {
-			test: /\.less/,
-			loader: 'style-loader!css-loader!less-loader'
+			test: /\.useable\.css$/,
+			loader: "style/useable!css"
 		}, {
 			test: /\.(png|jpg)$/,
-			loader: 'url-loader?limit=8192'
+			loader: "url-loader?limit=8192"
 		}]
 	}
 };

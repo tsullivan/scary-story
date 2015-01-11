@@ -1,21 +1,16 @@
 /* Stiziles */
-
-html, body {
-	background: silver;
+body {
+	padding: 15px 30px;
 }
 
-/* main */
+#app_backdrop {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
 
-.main {
-	width: 100%;
-	height: 100%;
-	color: #fff;
-}
-
-.main img {
-	width: 678px;
-	margin: 0 auto;
-	display: block;
+	z-index: -1;
 }
 
 .Inventory,

@@ -3,11 +3,19 @@
 var React = require('react');
 var Router = require('react-router');
 
+var prevStyle;
+
 var Place = React.createClass({
 	mixins: [ Router.State ],
 
 	render: function () {
+
 		var name = this.getParams().name;
+
+		var style = require('../../styles/places/' + name + '.useable.css');
+		style.use();
+		prevStyle && prevStyle.unuse();
+		prevStyle = style;
 
 		return (
 			<div className="Place">

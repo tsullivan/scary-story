@@ -11,9 +11,11 @@ var App = React.createClass({
 	mixins: [ Router.State ],
 
 	render: function () {
-		require('../../styles/example-transition.less');
+		require('../../styles/example-transition.css');
 
 		var name = this.getRoutes().reverse()[0].name;
+		var param = this.getParams().name;
+		var transitionGroupKey = (name && param) ? name + param : name;
 
 		return (
 			<div>
@@ -27,7 +29,7 @@ var App = React.createClass({
 
 				<div>
 					<TransitionGroup component="div" transitionName="example">
-						<RouteHandler key={name}/>
+						<RouteHandler key={transitionGroupKey}/>
 					</TransitionGroup>
 				</div>
 			</div>
@@ -43,5 +45,5 @@ var routes = (
 );
 
 Router.run(routes, function (Handler) {
-	React.render(<Handler/>, document.getElementById('example'));
+	React.render(<Handler/>, document.getElementById('application'));
 });

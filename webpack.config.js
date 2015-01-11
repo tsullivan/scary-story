@@ -4,24 +4,24 @@
  * This file is set up for serving the webpak-dev-server, which will watch for changes and recompile as required if
  * the subfolder /webpack-dev-server/ is visited. Visiting the root will not automatically reload.
  */
-'use strict';
-var webpack = require('webpack');
+"use strict";
+var webpack = require("webpack");
 
 module.exports = {
 
 	output: {
-		filename: 'main.js',
-		publicPath: '/assets/'
+		filename: "main.js",
+		publicPath: "/assets/"
 	},
 
 	cache: true,
 	debug: true,
 	devtool: false,
 	entry: [
-			'webpack/hot/only-dev-server',
-			'./src/scripts/components/main.jsx',
-			'./src/styles/main.css',
-			'./src/styles/normalize.css'
+			"webpack/hot/only-dev-server",
+			"./src/scripts/components/main.jsx",
+			"./src/styles/main.css",
+			"./src/styles/normalize.css"
 	],
 
 	stats: {
@@ -30,26 +30,27 @@ module.exports = {
 	},
 
 	resolve: {
-		extensions: ['', '.js', '.jsx']
+		extensions: ["", ".js", ".jsx"]
 	},
 	module: {
 		preLoaders: [{
-			test: '\\.js$',
-			exclude: 'node_modules',
-			loader: 'jshint'
+			test: "\\.js$",
+			exclude: "node_modules",
+			loader: "jshint"
 		}],
 		loaders: [{
 			test: /\.jsx$/,
-			loader: 'react-hot!jsx-loader?harmony'
-		}, {
-			test: /\.less/,
-			loader: 'style-loader!css-loader!less-loader'
+			loader: "react-hot!jsx-loader?harmony"
 		}, {
 			test: /\.css$/,
-			loader: 'style-loader!css-loader'
+			exclude: /\.useable\.css$/,
+			loader: "style!css"
+		}, {
+			test: /\.useable\.css$/,
+			loader: "style/useable!css"
 		}, {
 			test: /\.(png|jpg)$/,
-			loader: 'url-loader?limit=8192'
+			loader: "url-loader?limit=8192"
 		}]
 	},
 
