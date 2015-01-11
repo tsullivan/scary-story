@@ -1,56 +1,66 @@
-var React = require('react/addons');
-var ReactTransitionGroup = React.addons.TransitionGroup;
-var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
+var React = require('react');
+var TransitionGroup = require('react/lib/ReactCSSTransitionGroup');
 
 var Router = require('react-router');
 var { Route, RouteHandler, Link } = Router;
 
 
-var todoItems = ['hello', 'world', 'click', 'me'];
-
 var App = React.createClass({
-	render: function () {
-		return (
-			<div>
-				<ul>
-					<li><Link to="user" params={{userID: "123"}}>Bob</Link></li>
-					<li><Link to="user" params={{userID: "123"}} query={{showAge: true}}>Bob With Query Params</Link></li>
-					<li><Link to="user" params={{userID: "abc"}}>Sally</Link></li>
-					<li><Link to="todos">Todo List</Link></li>
-				</ul>
-				<ReactTransitionGroup transitionName="fade">
-					<RouteHandler/>
-				</ReactTransitionGroup>
-			</div>
-		);
-	}
-});
-
-var User = React.createClass({
 	mixins: [ Router.State ],
 
 	render: function () {
-		var age = this.getQuery().showAge ? '33' : '';
-		var userID = this.getParams().userID;
+		require('../../styles/example-transition.less');
+
+		var name = this.getRoutes().reverse()[0].name;
+
 		return (
-			<div className="User">
-				<h1>User id: {userID}</h1>
-				{age}
+			<div>
+				<ul>
+					<li><Link to="place" params={{name: "entrance"}}>Entrance</Link></li>
+					<li><Link to="place" params={{name: "cathedral"}}>Cathedral</Link></li>
+					<li><Link to="place" params={{name: "stables"}}>Stables</Link></li>
+					<li><Link to="place" params={{name: "graveyard"}}>Graveyard</Link></li>
+					<li><Link to="inventory">Inventory</Link></li>
+				</ul>
+
+				<div>
+					<TransitionGroup component="div" transitionName="example">
+						<RouteHandler key={name}/>
+					</TransitionGroup>
+				</div>
 			</div>
 		);
 	}
 });
 
-var TodoList = React.createClass({
+var Place = React.createClass({
+	mixins: [ Router.State ],
+
+	render: function () {
+		var name = this.getParams().name;
+
+		return (
+			<div className="Place">
+				<h1>
+					{name}
+				</h1>
+			</div>
+		);
+	}
+});
+
+var inventory = ['hello', 'world', 'click', 'me'];
+
+var Inventory = React.createClass({
 	getInitialState: function () {
-		return {items: todoItems};
+		return {items: inventory};
 	},
 	handleAdd: function () {
 		var newItems = this.state.items.concat([prompt('Enter some text')]);
 		this.setState({items: newItems});
 
 		// persistence
-		todoItems = newItems;
+		inventory = newItems;
 	},
 	handleRemove: function (i) {
 		var newItems = this.state.items;
@@ -58,6 +68,7 @@ var TodoList = React.createClass({
 		this.setState({items: newItems});
 	},
 	render: function() {
+
 		var items = this.state.items.map(function(item, i) {
 			return (
 				<div key={item} onClick={this.handleRemove.bind(this, i)}>
@@ -65,12 +76,13 @@ var TodoList = React.createClass({
 				</div>
 			);
 		}.bind(this));
+
 		return (
-			<div>
+			<div className="Inventory">
 				<button onClick={this.handleAdd}>Add Item</button>
-				<ReactCSSTransitionGroup transitionName="example">
+				<TransitionGroup transitionName="example">
 					{items}
-				</ReactCSSTransitionGroup>
+				</TransitionGroup>
 			</div>
 		);
 	}
@@ -78,8 +90,8 @@ var TodoList = React.createClass({
 
 var routes = (
 	<Route handler={App}>
-		<Route name="user" path="user/:userID" handler={User}/>
-		<Route name="todos" path="todos" handler={TodoList}/>
+		<Route name="inventory" path="inventory" handler={Inventory}/>
+		<Route name="place" path="place/:name" handler={Place}/>
 	</Route>
 );
 
