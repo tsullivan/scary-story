@@ -19,7 +19,9 @@ module.exports = {
 	devtool: false,
 	entry: [
 			'webpack/hot/only-dev-server',
-			'./src/scripts/components/main.jsx'
+			'./src/scripts/components/main.jsx',
+			'./src/styles/main.css',
+			'./src/styles/normalize.css'
 	],
 
 	stats: {
@@ -40,8 +42,8 @@ module.exports = {
 			test: /\.jsx$/,
 			loader: 'react-hot!jsx-loader?harmony'
 		}, {
-			test: /\.sass/,
-			loader: 'style-loader!css-loader!sass-loader?outputStyle=expanded'
+			test: /\.less/,
+			loader: 'style-loader!css-loader!less-loader'
 		}, {
 			test: /\.css$/,
 			loader: 'style-loader!css-loader'

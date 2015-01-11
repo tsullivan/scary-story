@@ -10,51 +10,55 @@ var webpack = require('webpack');
 
 module.exports = {
 
-  output: {
-    publicPath: '/assets/',
-    path: 'dist/assets/',
-    filename: 'main.js'
-  },
+	output: {
+		publicPath: '/assets/',
+		path: 'dist/assets/',
+		filename: 'main.js'
+	},
 
-  debug: false,
-  devtool: false,
-  entry: './src/scripts/components/main.jsx',
+	debug: false,
+	devtool: false,
+	entry: [
+			'./src/scripts/components/main.jsx',
+			'./src/styles/main.css',
+			'./src/styles/normalize.css'
+	],
 
-  stats: {
-    colors: true,
-    reasons: false
-  },
+	stats: {
+		colors: true,
+		reasons: false
+	},
 
-  plugins: [
-    new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.UglifyJsPlugin(),
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.optimize.AggressiveMergingPlugin()
-  ],
+	plugins: [
+		new webpack.optimize.DedupePlugin(),
+		new webpack.optimize.UglifyJsPlugin(),
+		new webpack.optimize.OccurenceOrderPlugin(),
+		new webpack.optimize.AggressiveMergingPlugin()
+	],
 
-  resolve: {
-    extensions: ['', '.js', '.jsx']
-  },
+	resolve: {
+		extensions: ['', '.js', '.jsx']
+	},
 
-  module: {
-    preLoaders: [{
-      test: '\\.js$',
-      exclude: 'node_modules',
-      loader: 'jshint'
-    }],
+	module: {
+		preLoaders: [{
+			test: '\\.js$',
+			exclude: 'node_modules',
+			loader: 'jshint'
+		}],
 
-    loaders: [{
-      test: /\.jsx$/,
-      loader: 'jsx-loader?harmony'
-    }, {
-      test: /\.css$/,
-      loader: 'style-loader!css-loader'
-    }, {
-      test: /\.sass/,
-      loader: 'style-loader!css-loader!sass-loader?outputStyle=expanded'
-    }, {
-      test: /\.(png|jpg)$/,
-      loader: 'url-loader?limit=8192'
-    }]
-  }
+		loaders: [{
+			test: /\.jsx$/,
+			loader: 'jsx-loader?harmony'
+		}, {
+			test: /\.css$/,
+			loader: 'style-loader!css-loader'
+		}, {
+			test: /\.less/,
+			loader: 'style-loader!css-loader!less-loader'
+		}, {
+			test: /\.(png|jpg)$/,
+			loader: 'url-loader?limit=8192'
+		}]
+	}
 };

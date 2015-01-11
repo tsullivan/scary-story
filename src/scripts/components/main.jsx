@@ -5,10 +5,6 @@ var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 var Router = require('react-router');
 var { Route, RouteHandler, Link } = Router;
 
-require('../../styles/normalize.css');
-require('../../styles/main.css');
-require('../../styles/fade-transition.css');
-require('../../styles/example-transition.css');
 
 var todoItems = ['hello', 'world', 'click', 'me'];
 
