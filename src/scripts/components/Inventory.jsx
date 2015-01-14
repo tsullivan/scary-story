@@ -3,7 +3,7 @@
 var React = require('react');
 var TransitionGroup = require('react/lib/ReactCSSTransitionGroup');
 
-var inventory = ['hello', 'world', 'click', 'me'];
+var inventory = ['lantern', 'can of oil'];
 
 var Inventory = React.createClass({
 	getInitialState: function () {
@@ -33,10 +33,11 @@ var Inventory = React.createClass({
 
 		return (
 			<div className="Inventory">
-				<button onClick={this.handleAdd}>Add Item</button>
+				<h2>Inventory</h2>
 				<TransitionGroup transitionName="example">
 					{items}
 				</TransitionGroup>
+				<button onClick={this.handleAdd}>Add Item</button>
 			</div>
 		);
 	}

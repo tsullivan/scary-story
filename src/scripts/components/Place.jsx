@@ -10,7 +10,7 @@ var Place = React.createClass({
 
 	render: function () {
 
-		var name = this.getParams().name;
+		var name = this.getParams().name || 'entrance';
 
 		var style = require('../../styles/places/' + name + '.useable.css');
 		style.use();

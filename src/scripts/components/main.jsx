@@ -22,14 +22,13 @@ var App = React.createClass({
 					<li><Link to="place" params={{name: "cathedral"}}>Cathedral</Link></li>
 					<li><Link to="place" params={{name: "stables"}}>Stables</Link></li>
 					<li><Link to="place" params={{name: "graveyard"}}>Graveyard</Link></li>
-					<li><Link to="inventory">Inventory</Link></li>
 				</ul>
 
-				<div>
-					<TransitionGroup component="div" transitionName="example">
-						<RouteHandler key={transitionGroupKey}/>
-					</TransitionGroup>
-				</div>
+				<TransitionGroup component="div" transitionName="example">
+					<RouteHandler key={transitionGroupKey}/>
+				</TransitionGroup>
+					
+				<Inventory/>
 			</div>
 		);
 	}
@@ -37,7 +36,7 @@ var App = React.createClass({
 
 var routes = (
 	<Route handler={App}>
-		<Route name="inventory" path="inventory" handler={Inventory}/>
+		<Route name="start" path="/" handler={Place}/>
 		<Route name="place" path="place/:name" handler={Place}/>
 	</Route>
 );
