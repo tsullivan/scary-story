@@ -11,8 +11,6 @@ var App = React.createClass({
 	mixins: [ Router.State ],
 
 	render: function () {
-		require('../../styles/example-transition.css');
-
 		var name = this.getRoutes().reverse()[0].name;
 		var param = this.getParams().name;
 		var transitionGroupKey = (name && param) ? name + param : name;
