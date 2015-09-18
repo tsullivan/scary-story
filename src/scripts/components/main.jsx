@@ -11,10 +11,11 @@ var App = React.createClass({
 	mixins: [ Router.State ],
 
 	render: function () {
-		var name = this.getRoutes().reverse()[0].name;
-		var param = this.getParams().name;
-		var transitionGroupKey = (name && param) ? name + param : name;
+		var name = this.getRoutes().reverse()[0].name; // get the final route
+		var param = this.getParams().name; // get the param of the route
+		var transitionGroupKey = (name && param) ? name + param : name; // needed for transition control
 
+    // "example" transition is defined in main.css
 		return (
 			<div>
 				<ul>
@@ -27,13 +28,14 @@ var App = React.createClass({
 				<TransitionGroup component="div" transitionName="example">
 					<RouteHandler key={transitionGroupKey}/>
 				</TransitionGroup>
-					
+
 				<Inventory/>
 			</div>
 		);
 	}
 });
 
+// there could also be routes for or score board, map, history or dedicated route for inventory
 var routes = (
 	<Route handler={App}>
 		<Route name="start" path="/" handler={Place}/>

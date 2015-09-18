@@ -1,3 +1,5 @@
+/* container for a place that you can go in the game */
+
 'use strict';
 
 var React = require('react');
